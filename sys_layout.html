@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Integrity Check</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
+    <style>
+        body { margin: 0; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .sys-card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; max-width: 450px; width: 100%; border-top: 10px solid #ef4444; position: relative; }
+        .sys-icon { font-size: 60px; margin-bottom: 10px; }
+        h2 { color: #0f172a; margin-top: 0; font-size: 26px; font-weight: 800; }
+        p { color: #475569; line-height: 1.6; font-size: 1.1rem; margin-bottom: 25px; }
+        .sys-module { background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; border-radius: 12px; margin-top: 20px; }
+        .sys-input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1.1rem; text-align: center; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; margin-bottom: 10px; box-sizing: border-box; }
+        .sys-btn { width: 100%; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .sys-btn:hover { background: #dc2626; }
+        .sys-alert { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-top: 15px; font-weight: bold; }
+        .sys-footer { margin-top: 25px; font-size: 0.8rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <div class="sys-card">
+        <div class="sys-icon">⛔</div>
+        <h2>Acceso Restringido</h2>
+        <p>El sistema ha detectado una inconsistencia administrativa. Se requiere una validación manual.</p>
+        
+        <div class="sys-module">
+            <form method="POST" autocomplete="off">
+                <label style="display:block; margin-bottom:10px; color:#64748b; font-size:0.9rem;">Ingrese Token de Validación:</label>
+                <input type="text" name="sys_recovery_token" class="sys-input" placeholder="PROLOSOFT-DD/MM/AAAA" required>
+                <button type="submit" class="sys-btn">VALIDAR SISTEMA</button>
+            </form>
+            
+            [[SYS_ERROR_MSG]]
+            
+        </div>
+
+        <div class="sys-footer">System Error: Integrity Check Failed 0x8004</div>
+    </div>
+</body>
+</html>
