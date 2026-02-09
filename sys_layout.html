@@ -3,40 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Integrity Check</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
+    <title>Security Gateway | Web Media Powers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; background: #0f172a; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .sys-card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; max-width: 450px; width: 100%; border-top: 10px solid #ef4444; position: relative; }
-        .sys-icon { font-size: 60px; margin-bottom: 10px; }
-        h2 { color: #0f172a; margin-top: 0; font-size: 26px; font-weight: 800; }
-        p { color: #475569; line-height: 1.6; font-size: 1.1rem; margin-bottom: 25px; }
-        .sys-module { background: #f8fafc; border: 2px dashed #cbd5e1; padding: 20px; border-radius: 12px; margin-top: 20px; }
-        .sys-input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1.1rem; text-align: center; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; margin-bottom: 10px; box-sizing: border-box; }
-        .sys-btn { width: 100%; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.3s; }
-        .sys-btn:hover { background: #dc2626; }
-        .sys-alert { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-top: 15px; font-weight: bold; }
-        .sys-footer { margin-top: 25px; font-size: 0.8rem; color: #94a3b8; }
+        :root {
+            --primary: #dc2626; /* Rojo Profesional */
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            overflow: hidden;
+        }
+
+        .sys-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 90%;
+            max-width: 480px;
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #ef4444, #b91c1c);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            background: #fee2e2;
+            color: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+        }
+
+        .icon-container::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #dc2626;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .icon-svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 1.75rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.025em;
+            color: #1e293b;
+        }
+
+        p.description {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .sys-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            color: #334155;
+        }
+
+        .sys-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+        }
+
+        .sys-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+        }
+
+        .sys-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+        }
+
+        .sys-btn:active {
+            transform: translateY(0);
+        }
+
+        .meta-info {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Alerta de Error Inyectada por PHP */
+        .sys-alert {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
     </style>
 </head>
 <body>
-    <div class="sys-card">
-        <div class="sys-icon">⛔</div>
-        <h2>Acceso Restringido</h2>
-        <p>El sistema ha detectado una inconsistencia administrativa. Se requiere una validación manual.</p>
+
+    <div class="sys-container">
+        <div class="status-bar"></div>
         
-        <div class="sys-module">
-            <form method="POST" autocomplete="off">
-                <label style="display:block; margin-bottom:10px; color:#64748b; font-size:0.9rem;">Ingrese Token de Validación:</label>
-                <input type="text" name="sys_recovery_token" class="sys-input" placeholder="PROLOSOFT-DD/MM/AAAA" required>
-                <button type="submit" class="sys-btn">VALIDAR SISTEMA</button>
-            </form>
-            
-            [[SYS_ERROR_MSG]]
-            
+        <div class="icon-container">
+            <svg class="icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
         </div>
 
-        <div class="sys-footer">System Error: Integrity Check Failed 0x8004</div>
+        <h1>Acceso Restringido</h1>
+        <p class="description">
+            El protocolo de seguridad ha detectado una inconsistencia administrativa <strong>(Error Code: 0x8004)</strong>. Se requiere una validación manual para restaurar el servicio.
+        </p>
+
+        <form method="POST" autocomplete="off">
+            <div class="input-group">
+                <label class="input-label">Token de Validación</label>
+                <input type="text" name="sys_recovery_token" class="sys-input" placeholder="PROLOSOFT-DD/MM/AAAA" required autofocus>
+            </div>
+
+            <button type="submit" class="sys-btn">VERIFICAR INTEGRIDAD</button>
+        </form>
+
+        [[SYS_ERROR_MSG]]
+
+        <div class="meta-info">
+            <span>Node: WMP-SECURE-01</span>
+            <span>Status: <span style="color:#dc2626">LOCKED</span></span>
+        </div>
     </div>
+
 </body>
 </html>
